@@ -1,9 +1,22 @@
+import { useState } from 'react';
+import Cart from './components/Cart';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+
 const App = () => {
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const toggleSidebar = () => setOpenSidebar(!openSidebar);
+
   return (
-    <div>
-      <h1 className="text-4xl font-black" aria-label="heading">
-        Make me a sandwich
-      </h1>
+    <div className="flex flex-col h-screen w-screen">
+      <Header toggleSidebar={toggleSidebar} />
+      <div className="flex h-full text-center">
+        <Sidebar open={openSidebar} toggleSidebar={toggleSidebar} />
+        <main className="flex-grow">
+          <div className="pt-8 text-4xl font-semibold">Content</div>
+        </main>
+        <Cart />
+      </div>
     </div>
   );
 };
