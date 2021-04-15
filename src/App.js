@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Cart from './components/Cart';
+import CartCheckout from './components/CartCheckout/CartCheckout';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
@@ -15,7 +15,7 @@ const App = () => {
         <main className="flex-grow">
           <div className="pt-8 text-4xl font-semibold">Content</div>
         </main>
-        <Cart />
+        <CartCheckout />
       </div>
     </div>
   );
