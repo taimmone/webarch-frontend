@@ -1,4 +1,4 @@
-import MenuIcon from '../icons/MenuIcon';
+import MenuIcon from './icons/MenuIcon';
 import IconButton from './IconButton';
 
 const SidebarButton = ({ handleClick }) => {

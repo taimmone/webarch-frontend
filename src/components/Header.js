@@ -1,5 +1,5 @@
 import IconButton from './IconButton';
-import CartIcon from '../icons/CartIcon';
+import CartIcon from './icons/CartIcon';
 import SidebarButton from './MenuButton';
 
 const Header = ({ toggleSidebar }) => {
