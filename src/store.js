@@ -9,8 +9,7 @@ const StateProvider = ({ children }) => {
     switch (action.type) {
       case 'selectSandwich': {
         const { sandwichId } = action.payload;
-        const newState = { ...state, sandwichId };
-        return newState;
+        return { ...state, sandwichId };
       }
       case 'setOrder':
         const { order } = action.payload;
