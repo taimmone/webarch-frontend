@@ -5,7 +5,7 @@ import SidebarButton from './MenuButton';
 const Header = ({ toggleSidebar }) => {
   return (
     <header className="h-20 border-b z-10">
-      <div className="flex p-4 h-full justify-between items-center text-center shadow-md">
+      <div className="flex p-4 h-full justify-between items-center text-center">
         <div className="xl:invisible">
           <SidebarButton handleClick={toggleSidebar} />
         </div>

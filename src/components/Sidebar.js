@@ -7,7 +7,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
         open ? 'w-full z-50' : 'hidden'
       }`}
     >
-      <div className="max-w-xs h-full w-full bg-white border-r shadow-md xl:visible">
+      <div className="max-w-xs h-full w-full bg-white border-r xl:visible">
         <div className="flex justify-end p-4 xl:hidden">
           <SidebarButton handleClick={toggleSidebar} />
         </div>
