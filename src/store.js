@@ -11,6 +11,8 @@ const StateProvider = ({ children }) => {
         const { sandwichId } = action.payload;
         return { ...state, sandwichId };
       }
+      case 'clearSandwich':
+        return { ...state, sandwichId: null };
       case 'setOrder':
         const { order } = action.payload;
         return { ...state, order };
