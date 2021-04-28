@@ -1,4 +1,4 @@
-import SidebarButton from './MenuButton';
+import { SidebarButton } from './MenuButtons';
 
 const Sidebar = ({ open, toggleSidebar }) => {
   return (
