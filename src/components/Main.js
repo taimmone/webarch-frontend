@@ -21,6 +21,13 @@ const Main = () => {
     dispatch({ type: 'selectSandwich', payload: { sandwichId: id } });
   };
 
+  const addToOrder = () => {
+    const { sandwichId } = state;
+    if (!sandwichId) return alert('No sandwich selected!');
+    dispatch({ type: 'setOrder', payload: { sandwichId, status: 'checkout' } });
+    dispatch({ type: 'clearSandwich' });
+  };
+
   return (
     <main className="flex-grow flex flex-col mx-auto px-4 max-w-2xl">
       {console.log(state)}
@@ -30,7 +37,7 @@ const Main = () => {
           return <Sandwich key={sandwichId} {...{ sandwichId, handleSelect, state }} />;
         })}
       </div>
-      <button className="self-end p-4 px-6 border-2 text-xl" type="button">
+      <button className="self-end p-4 px-6 border-2 text-xl" onClick={addToOrder} type="button">
         Select sandwich ➤
       </button>
     </main>
