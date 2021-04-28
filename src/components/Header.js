@@ -8,7 +8,7 @@ const Header = ({ toggleSidebar, toggleCheckout }) => {
           <SidebarButton handleClick={toggleSidebar} />
         </div>
         <h1 className="text-2xl font-black flex-grow">Heading</h1>
-        <div className="lg:invisible">
+        <div className="md:invisible">
           <CheckoutButton handleClick={toggleCheckout} />
         </div>
       </div>
