@@ -12,7 +12,7 @@ const Checkout = ({ open, toggleCheckout }) => {
         <div className="flex p-4 md:hidden">
           <CheckoutButton handleClick={toggleCheckout} />
         </div>
-        <div className="py-8 text-4xl font-semibold">Checkout</div>
+        <div className="py-8 text-4xl h-full font-semibold">Checkout</div>
         <div className="py-8 flex justify-around">
           <button className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-1 ring-black">
             Cancel
