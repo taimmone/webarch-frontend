@@ -6,15 +6,17 @@ import Sidebar from './components/Sidebar';
 
 const App = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [openCheckout, setOpenCheckout] = useState(false);
   const toggleSidebar = () => setOpenSidebar(!openSidebar);
+  const toggleCheckout = () => setOpenCheckout(!openCheckout);
 
   return (
     <div className="flex flex-col h-screen w-screen">
-      <Header toggleSidebar={toggleSidebar} />
+      <Header {...{  toggleSidebar, toggleCheckout  }} />
       <div className="flex h-full text-center">
         <Sidebar open={openSidebar} toggleSidebar={toggleSidebar} />
         <Main />
-        <Checkout />
+        <Checkout open={openCheckout} toggleCheckout={toggleCheckout} />
       </div>
     </div>
   );
