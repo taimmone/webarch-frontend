@@ -4,7 +4,7 @@ import { store } from '../store';
 const Sandwich = ({ sandwichId, handleSelect, state }) => {
   return (
     <div
-      className="p-12 border text-2xl col-span-2 sm:col-auto font-semibold flex items-center justify-between hover:border-black"
+      className="p-12 border text-2xl col-span-2 sm:col-auto md:col-span-2 lg:col-auto font-semibold flex items-center justify-between hover:border-black"
       onClick={() => handleSelect(sandwichId)}
     >
       <input type="radio" name="sandwich" readOnly checked={sandwichId === state.sandwichId} />
@@ -22,7 +22,7 @@ const Main = () => {
   };
 
   return (
-    <main className="flex-grow flex flex-col mx-4">
+    <main className="flex-grow flex flex-col mx-auto px-4 max-w-2xl">
       {console.log(state)}
       <div className="pt-8 text-4xl font-semibold mb-12">Content</div>
       <div className="w-full grid grid-cols-2 gap-3 grid-flow-row">
