@@ -1,6 +1,27 @@
+import { useContext } from 'react';
+import { store } from '../store';
 import { CheckoutButton } from './MenuButtons';
+import orderService from '../services/order';
 
 const Checkout = ({ open, toggleCheckout }) => {
+  const { state, dispatch } = useContext(store);
+
+  const handleOrder = () => {
+    orderService
+      .create({ ...state.order, status: 'ordered' })
+      .then(res => {
+        console.log(res);
+        if (res.status !== 200) return console.log('Error validating order');
+        clearOrder();
+        alert('Order sent!');
+      })
+      .catch(reason => console.error(reason));
+  };
+
+  const clearOrder = () => {
+    dispatch({ type: 'clearOrder' });
+  };
+
   return (
     <aside
       className={`flex fixed top-0 md:static md:block md:max-w-xs w-full h-full ${
@@ -12,12 +33,21 @@ const Checkout = ({ open, toggleCheckout }) => {
         <div className="flex p-4 md:hidden">
           <CheckoutButton handleClick={toggleCheckout} />
         </div>
-        <div className="py-8 text-4xl h-full font-semibold">Checkout</div>
+        <div className="py-8 h-full">
+          <div className="text-4xl font-semibold">Checkout</div>
+          <div className="text-xl mt-4">{`SandwichId: ${state.order?.sandwichId}`}</div>
+        </div>
         <div className="py-8 flex justify-around">
-          <button className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-1 ring-black">
+          <button
+            className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-1 ring-black"
+            onClick={clearOrder}
+          >
             Cancel
           </button>
-          <button className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-2 ring-black">
+          <button
+            className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-2 ring-black"
+            onClick={handleOrder}
+          >
             Order
           </button>
         </div>
