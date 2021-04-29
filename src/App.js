@@ -11,7 +11,7 @@ const App = () => {
   const toggleCheckout = () => setOpenCheckout(!openCheckout);
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-x-hidden">
+    <div className="flex flex-col h-screen w-screen overflow-hidden">
       <Header {...{ toggleSidebar, toggleCheckout }} />
       <div className="flex h-full text-center">
         <Sidebar open={openSidebar} toggleSidebar={toggleSidebar} />
