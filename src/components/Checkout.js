@@ -20,8 +20,7 @@ const Checkout = ({ open, toggleCheckout }) => {
     orderService
       .create({ ...state.order, status: 'ordered' })
       .then(res => {
-        console.log(res);
-        if (res.status !== 200) return console.log('Error validating order');
+        if (res.status !== 200) return alert('Error validating order');
         clearOrder();
         alert('Order sent!');
       })
@@ -45,7 +44,9 @@ const Checkout = ({ open, toggleCheckout }) => {
         </div>
         <div className="py-8 h-full">
           <div className="text-4xl font-semibold">Checkout</div>
-          <div className="text-xl mt-4">{`SandwichId: ${state.order?.sandwichId}`}</div>
+          <div className="text-xl mt-4">
+            {state.order ? `SandwichId: ${state.order.sandwichId}` : 'Please select a sandwich'}
+          </div>
         </div>
         <div className="py-8 flex justify-around">
           <OrderButton text="Cancel" handleClick={clearOrder} isDisabled={!state.order} />

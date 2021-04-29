@@ -30,7 +30,6 @@ const Main = () => {
 
   return (
     <main className="flex-grow flex flex-col mx-auto px-4 max-w-2xl">
-      {console.log(state)}
       <div className="pt-8 text-4xl font-semibold mb-12">Content</div>
       <div className="w-full grid grid-cols-2 gap-3 grid-flow-row">
         {sandwiches.map(({ sandwichId }) => (
