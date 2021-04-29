@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import orderService from '../services/order';
 import { store } from '../store';
 import { SidebarButton } from './MenuButtons';
@@ -12,8 +12,17 @@ const Order = ({ order }) => {
   );
 };
 
+const PlaceHolder = () => (
+  <div className="animate-pulse flex flex-col items-center mt-4">
+    <div className="h-7 w-24 bg-gray-200 my-2 rounded" />
+    <div className="h-6 w-36 bg-gray-200 rounded" />
+  </div>
+);
+
 const Sidebar = ({ open, toggleSidebar }) => {
   const { state, dispatch } = useContext(store);
+  const [isLoaded, setLoadedStatus] = useState(false);
+  const [isConnected, setConnectedStatus] = useState(false);
 
   useEffect(() => {
     const getOrders = () =>
@@ -21,8 +30,10 @@ const Sidebar = ({ open, toggleSidebar }) => {
         .getAll()
         .then(({ data }) => {
           dispatch({ type: 'setAllOrders', payload: data });
+          setConnectedStatus(true);
+          setLoadedStatus(true);
         })
-        .catch(err => alert(`Problem retrieving orders: ${err.message}`));
+        .catch(_err => setConnectedStatus(false));
     getOrders();
     const update = setInterval(() => getOrders(), 2000);
     return () => clearInterval(update);
@@ -41,9 +52,14 @@ const Sidebar = ({ open, toggleSidebar }) => {
         <div className="pt-8 h-full mx-4 border-t xl:border-none overflow-y-auto">
           <div className=" text-center font-semibold text-4xl">Orders</div>
           <ul>
-            {state.orders?.map(order => (
-              <Order key={order.id} order={order} />
-            ))}
+            {isConnected || isLoaded ? (
+              state.orders?.map(order => <Order key={order.id} order={order} />)
+            ) : (
+              <>
+                <PlaceHolder />
+                <PlaceHolder />
+              </>
+            )}
           </ul>
         </div>
       </div>
