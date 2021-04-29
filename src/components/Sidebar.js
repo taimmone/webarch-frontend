@@ -16,12 +16,16 @@ const Sidebar = ({ open, toggleSidebar }) => {
   const { state, dispatch } = useContext(store);
 
   useEffect(() => {
-    orderService
-      .getAll()
-      .then(({ data }) => {
-        dispatch({ type: 'setAllOrders', payload: data });
-      })
-      .catch(err => alert(`Problem retrieving orders: ${err.message}`));
+    const getOrders = () =>
+      orderService
+        .getAll()
+        .then(({ data }) => {
+          dispatch({ type: 'setAllOrders', payload: data });
+        })
+        .catch(err => alert(`Problem retrieving orders: ${err.message}`));
+    getOrders();
+    const update = setInterval(() => getOrders(), 2000);
+    return () => clearInterval(update);
   }, [dispatch]);
 
   return (
