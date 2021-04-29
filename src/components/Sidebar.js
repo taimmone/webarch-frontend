@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import orderService from '../services/order';
 import { store } from '../store';
+import ErrorIcon from './icons/ErrorIcon';
+import PauseIcon from './icons/PauseIcon';
+import PlayIcon from './icons/PlayIcon';
 import { SidebarButton } from './MenuButtons';
 
 const Order = ({ order }) => {
@@ -19,10 +22,38 @@ const PlaceHolder = () => (
   </div>
 );
 
+const ButtonContent = ({ text, icon }) => (
+  <>
+    <span>{text}</span> {icon}
+  </>
+);
+
+const ToggleButton = ({ isUpdating, toggleUpdate, isConnected }) => {
+  return (
+    <div
+      className={`flex items-center justify-center self-center h-12 w-52 px-3 mt-2 rounded-md space-x-2 font-bold select-none ${
+        !isConnected
+          ? 'bg-red-500 text-white cursor-default'
+          : `cursor-pointer ${isUpdating ? 'bg-green-200' : 'bg-gray-200'}`
+      }`}
+      onClick={toggleUpdate}
+    >
+      {!isConnected ? (
+        <ButtonContent text="Could not connect" icon={<ErrorIcon />} />
+      ) : isUpdating ? (
+        <ButtonContent text="Updating orders" icon={<PauseIcon />} />
+      ) : (
+        <ButtonContent text="Update paused" icon={<PlayIcon />} />
+      )}
+    </div>
+  );
+};
+
 const Sidebar = ({ open, toggleSidebar }) => {
   const { state, dispatch } = useContext(store);
   const [isLoaded, setLoadedStatus] = useState(false);
   const [isConnected, setConnectedStatus] = useState(false);
+  const [isUpdating, setUpdating] = useState(true);
 
   useEffect(() => {
     const getOrders = () =>
@@ -35,9 +66,13 @@ const Sidebar = ({ open, toggleSidebar }) => {
         })
         .catch(_err => setConnectedStatus(false));
     getOrders();
-    const update = setInterval(() => getOrders(), 2000);
-    return () => clearInterval(update);
-  }, [dispatch]);
+    if (isUpdating) {
+      const update = setInterval(() => getOrders(), 2000);
+      return () => clearInterval(update);
+    }
+  }, [dispatch, isUpdating]);
+
+  const toggleUpdate = () => setUpdating(!isUpdating);
 
   return (
     <aside
@@ -49,8 +84,9 @@ const Sidebar = ({ open, toggleSidebar }) => {
         <div className="flex justify-end p-4 xl:hidden">
           <SidebarButton handleClick={toggleSidebar} />
         </div>
-        <div className="pt-8 h-full mx-4 border-t xl:border-none overflow-y-auto">
+        <div className="flex flex-col relative pt-8 h-full mx-4 border-t xl:border-none overflow-y-auto">
           <div className=" text-center font-semibold text-4xl">Orders</div>
+          <ToggleButton {...{ isUpdating, toggleUpdate, isConnected }} />
           <ul>
             {isConnected || isLoaded ? (
               state.orders?.map(order => <Order key={order.id} order={order} />)
