@@ -3,6 +3,15 @@ import { store } from '../store';
 import { CheckoutButton } from './MenuButtons';
 import orderService from '../services/order';
 
+const OrderButton = ({ text, handleClick }) => (
+  <button
+    className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-2 ring-black disabled:opacity-50"
+    onClick={handleClick}
+  >
+    {text}
+  </button>
+);
+
 const Checkout = ({ open, toggleCheckout }) => {
   const { state, dispatch } = useContext(store);
 
@@ -38,18 +47,8 @@ const Checkout = ({ open, toggleCheckout }) => {
           <div className="text-xl mt-4">{`SandwichId: ${state.order?.sandwichId}`}</div>
         </div>
         <div className="py-8 flex justify-around">
-          <button
-            className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-1 ring-black"
-            onClick={clearOrder}
-          >
-            Cancel
-          </button>
-          <button
-            className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-2 ring-black"
-            onClick={handleOrder}
-          >
-            Order
-          </button>
+          <OrderButton text="Cancel" handleClick={clearOrder} />
+          <OrderButton text="Order" handleClick={handleOrder} />
         </div>
       </div>
     </aside>
