@@ -21,6 +21,7 @@ const Checkout = ({ open, toggleCheckout }) => {
       .create({ ...state.order, status: 'ordered' })
       .then(res => {
         if (res.status !== 200) return alert('Error validating order');
+        dispatch({ type: 'setAllOrders', payload: [...state.orders, res.data] });
         clearOrder();
         alert('Order sent!');
       })
