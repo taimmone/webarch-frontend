@@ -21,7 +21,10 @@ const Checkout = ({ open, toggleCheckout }) => {
       .create({ ...state.order, status: 'ordered' })
       .then(res => {
         if (res.status !== 200) return alert('Error validating order');
-        dispatch({ type: 'setAllOrders', payload: [...state.orders, res.data] });
+        dispatch({
+          type: 'setAllOrders',
+          payload: [...state.orders, { ...res.data, order_status: 'created' }],
+        });
         clearOrder();
         alert('Order sent!');
       })
@@ -39,11 +42,11 @@ const Checkout = ({ open, toggleCheckout }) => {
       }`}
     >
       <div className={`flex-grow bg-black bg-opacity-50 md:bg-transparent ${open ? 'z-50' : ''}`} />
-      <div className="flex flex-col justify-between max-w-xs w-full border-l bg-white">
+      <div className="flex flex-col max-w-xs w-full h-full border-l bg-white">
         <div className="flex p-4 md:hidden">
           <CheckoutButton handleClick={toggleCheckout} />
         </div>
-        <div className="py-8 h-full">
+        <div className="py-8">
           <div className="text-4xl font-semibold">Checkout</div>
           <div className="text-xl mt-4">
             {state.order ? `SandwichId: ${state.order.sandwichId}` : 'Please select a sandwich'}
