@@ -9,10 +9,10 @@ const StateProvider = ({ children }) => {
     switch (action.type) {
       case 'selectSandwich': {
         const { sandwichId } = action.payload;
-        return { ...state, sandwichId };
+        return { ...state, sandwich: { id: sandwichId } };
       }
       case 'clearSandwich':
-        return { ...state, sandwichId: null };
+        return { ...state, sandwich: null };
       case 'setOrder':
         return { ...state, order: action.payload };
       case 'clearOrder': {
