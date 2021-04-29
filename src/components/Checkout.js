@@ -3,10 +3,11 @@ import { store } from '../store';
 import { CheckoutButton } from './MenuButtons';
 import orderService from '../services/order';
 
-const OrderButton = ({ text, handleClick }) => (
+const OrderButton = ({ text, handleClick, isDisabled }) => (
   <button
     className="rounded-full w-32 h-8 flex self-center bg-white items-center justify-center text-xl font-bold ring-2 ring-black disabled:opacity-50"
     onClick={handleClick}
+    disabled={isDisabled}
   >
     {text}
   </button>
@@ -47,8 +48,8 @@ const Checkout = ({ open, toggleCheckout }) => {
           <div className="text-xl mt-4">{`SandwichId: ${state.order?.sandwichId}`}</div>
         </div>
         <div className="py-8 flex justify-around">
-          <OrderButton text="Cancel" handleClick={clearOrder} />
-          <OrderButton text="Order" handleClick={handleOrder} />
+          <OrderButton text="Cancel" handleClick={clearOrder} isDisabled={!state.order} />
+          <OrderButton text="Order" handleClick={handleOrder} isDisabled={!state.order} />
         </div>
       </div>
     </aside>
