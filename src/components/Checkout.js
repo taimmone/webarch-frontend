@@ -38,7 +38,7 @@ const Checkout = ({ open, toggleCheckout }) => {
       }`}
     >
       <div className={`flex-grow bg-black bg-opacity-50 md:bg-transparent ${open ? 'z-50' : ''}`} />
-      <div className="flex flex-col h-full justify-between max-w-xs w-full border-l bg-white">
+      <div className="flex flex-col justify-between max-w-xs w-full border-l bg-white">
         <div className="flex p-4 md:hidden">
           <CheckoutButton handleClick={toggleCheckout} />
         </div>
