@@ -25,7 +25,7 @@ const Checkout = ({ open, toggleCheckout }) => {
         clearOrder();
         alert('Order sent!');
       })
-      .catch(reason => console.error(reason));
+      .catch(err => alert(`Problem making order: ${err.message}`));
   };
 
   const clearOrder = () => {
