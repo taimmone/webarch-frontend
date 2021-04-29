@@ -18,6 +18,9 @@ const StateProvider = ({ children }) => {
       case 'clearOrder': {
         return { ...state, order: null };
       }
+      case 'setAllOrders': {
+        return { ...state, orders: action.payload };
+      }
       default:
         throw new Error();
     }
