@@ -1,6 +1,6 @@
 # Frontend
 
-Frontend implementation I built for TUNI's course COMP.CS.520.
+Frontend implementation I built for TUNI's course COMP.CS.510.
 
 ## Tools used
 
