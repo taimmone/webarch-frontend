@@ -1,8 +1,7 @@
 # Frontend
 
-This directory is for the code of your group's frontend implementation.
+Frontend implementation I built for TUNI's course COMP.CS.520.
 
-## React and friends
-The recommended technology for defining the UI is React. But with React you have to use other components too, for example to communicate with the backend API. Your group is free to research and choose those components as you will.
+## Tools used
 
-As you can see, the frontend definition is very limited, giving your group much freedom (you can for example use something else than React), but also much responsibility. If the backend architecture definition was more limiting, and mainly left the groups to describe and implement the architecture, in the frontend the group can also design freely. It is interesting too see what interesting solutions this freedom leads to. Good luck and happy designing!
+React, React Context, Axios, TailwindCSS (and its bloat)
